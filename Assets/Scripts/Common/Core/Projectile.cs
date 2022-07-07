@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using SpaceShooter.Configs;
+using SpaceShooter.Controllers;
 using SpaceShooter.Managers;
 
 namespace SpaceShooter.Core {
@@ -15,14 +16,9 @@ namespace SpaceShooter.Core {
 
         #endregion --------------------------------------------
 
-        #region ----------- Private Methods -----------------
-        private void OnTriggerEnter2D(Collider2D collision) {
-            if ((isEnemyBullet && collision.CompareTag(GameStrings.playerTag))
-            || (!isEnemyBullet && collision.CompareTag(GameStrings.enemyTag))) {
-                GameManager.Instance.DealDamage(collision, damage);
-                Destroy(gameObject);
-            }
-        }
+        #region ----------- Public Variables -----------------
+        public bool IsEnemyBullet { get => isEnemyBullet; }
+        public int Damage { get => damage; }
         #endregion --------------------------------------------
     }
 }

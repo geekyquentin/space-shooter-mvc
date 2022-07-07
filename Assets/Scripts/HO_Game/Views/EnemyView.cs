@@ -1,29 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using SpaceShooter.Models;
 using SpaceShooter.Managers;
+using SpaceShooter.Controllers;
+using SpaceShooter.Core;
 
-namespace SpaceShooter.Core {
-    public class Enemy : MonoBehaviour, IDamageable {
+namespace SpaceShooter.Views {
+    public class EnemyView : Entity, IDamageable {
         #region ----------- Private  Variables -----------------
 
         #region ----------- SerializeField -----------------
-        [SerializeField] private GameObject centralGun;
-        [SerializeField] private ParticleSystem centralGunFX;
+        [SerializeField] private ParticleSystem centralGun;
         #endregion --------------------------------------------
 
         #endregion --------------------------------------------
 
         #region ----------- Public  Variables -----------------
-        public void MakeAShot(GameObject projectile) {
-            if (transform.position.y > GameManager.Instance.Borders.maxY) { return; }
+        public void MakeAShot() {
+            if (transform.position.y > GameManager.Instance.BorderMaxPoint.y) { return; }
 
-            Instantiate(projectile, centralGun.transform.position, Quaternion.identity);
+            InstantiateProjectile(centralGun.transform.position, new Vector3(0, 0, -180));
         }
 
         public void DeathBehaviour() {
-            GameManager.Instance.IncrementScore();
+            gameController.DealEnemyDeath();
             Destroy(gameObject);
         }
         #endregion --------------------------------------------

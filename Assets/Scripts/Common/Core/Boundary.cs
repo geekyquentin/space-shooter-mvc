@@ -5,11 +5,15 @@ using UnityEngine;
 namespace SpaceShooter.Core {
     public class Boundary : MonoBehaviour {
         #region ----------- Private  Variables -----------------
+
+        #region ----------- SerializeField -----------------
         private void OnTriggerExit2D(Collider2D collision) {
             if (collision.TryGetComponent<Translater>(out Translater translater)) {
                 Destroy(translater.gameObject);
             }
         }
+        #endregion --------------------------------------------
+
         #endregion --------------------------------------------
     }
 }

@@ -31,6 +31,7 @@ namespace SpaceShooter.Managers {
 
             musicAudioSource = gameObject.AddComponent<AudioSource>();
             sfxAudioSourceList = new List<AudioSource>();
+            PlayBGM();
         }
 
         private void OnApplicationPause(bool pauseStatus) {
@@ -115,7 +116,7 @@ namespace SpaceShooter.Managers {
 
         #region-------------------- Audio Event Methods ---------------------
         public void PlayBGM() {
-            PlayMusicClip(musicClips[0], 0.25f);
+            PlayMusicClip(musicClips[0], 0.75f);
         }
 
         public void StopBGM() {
@@ -126,36 +127,24 @@ namespace SpaceShooter.Managers {
             PlaySfxClip(sfxClips[0], 1f);
         }
 
-        public void PlayOnCorrectTouch() {
+        public void PlayOnPlayerShoot() {
+            PlaySfxClip(sfxClips[1], 0.5f);
+        }
+
+        public void PlayOnPowerUpEquip() {
             PlaySfxClip(sfxClips[2], 1f);
         }
 
-        public void PlayOnIncorrectTouch() {
-            PlaySfxClip(sfxClips[3], 1f);
+        public void PlayOnPlayerHit() {
+            PlaySfxClip(sfxClips[3], 0.25f);
         }
 
-        public void PlayOnClickHelp() {
+        public void PlayOnPlayerDeath() {
             PlaySfxClip(sfxClips[4], 1f);
         }
 
-        public void PlayOnTaskStarted() {
-            PlaySfxClip(sfxClips[5], 0.8f);
-        }
-
-        public void PlayOnTaskComplete() {
-            PlaySfxClip(sfxClips[1], 1f);
-        }
-
-        public void PlayOnElementToBlank() {
-            PlaySfxClip(sfxClips[7], 1f);
-        }
-
-        public void PlayOnGameComplete() {
-            PlaySfxClip(sfxClips[8], 1f);
-        }
-
-        public void PlayOnGameOver() {
-            PlaySfxClip(sfxClips[9], 0.8f);
+        public void PlayOnEnemyDeath() {
+            PlaySfxClip(sfxClips[5], 0.5f);
         }
         #endregion-------------------------------------------------------------
 

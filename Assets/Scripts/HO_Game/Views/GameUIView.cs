@@ -20,8 +20,8 @@ namespace SpaceShooter.Views {
         [SerializeField] private List<UIScreenComponent> uiScreens;
 
         [Header("Start Game UI")]
-        [SerializeField] private TextMeshProUGUI totalCreditsValue;
         [SerializeField] private Button playButton;
+        [SerializeField] private TextMeshProUGUI totalScore;
 
         [Header("Game Play UI")]
         [SerializeField] private Button pauseButton;
@@ -54,6 +54,11 @@ namespace SpaceShooter.Views {
         #endregion
 
         #region Non-MonoBehaviour
+        private void SetupStartUI() {
+            totalScore.text = PlayerPrefs.GetInt(GameStrings.totalScorePref, 0).ToString();
+            SetUIActive(UIScreen.StartUI);
+        }
+
         private void SetButtonListeners() {
             playButton.onClick.AddListener(() => OnClickStart());
             pauseButton.onClick.AddListener(() => OnClickPause());
@@ -75,28 +80,28 @@ namespace SpaceShooter.Views {
 
         #region Button Clicks
         private void OnClickStart() {
-            //AudioManager.Instance.PlayOnClickButton();
+            AudioManager.Instance.PlayOnClickButton();
             gameController.StartGame();
         }
 
         private void OnClickPause() {
-            //AudioManager.Instance.PlayOnClickButton();
+            AudioManager.Instance.PlayOnClickButton();
             gameController.PauseGame();
         }
 
         private void OnClickContinue() {
-            //AudioManager.Instance.PlayOnClickButton();
+            AudioManager.Instance.PlayOnClickButton();
             gameController.ContinueGame();
         }
 
         private void OnClickSFXToggle() {
-            //AudioManager.Instance.PlayOnClickButton();
+            AudioManager.Instance.PlayOnClickButton();
             AudioManager.Instance.ToggleSounds();
             SetSFXToggleButtonText();
         }
 
         private void OnClickExit() {
-            //AudioManager.Instance.PlayOnClickButton();
+            AudioManager.Instance.PlayOnClickButton();
             gameController.ExitGame();
         }
 
@@ -108,31 +113,26 @@ namespace SpaceShooter.Views {
         #endregion
 
         #region Public Methods
-        public void SetupStartUI() {
-            SetUIActive(UIScreen.StartUI);
-            totalCreditsValue.text = PlayerPrefs.GetInt(GameStrings.highscorePref).ToString();
-        }
-
         public void SetupGamePlayUI() {
             SetUIActive(UIScreen.GamePlayUI);
         }
 
+        public void SetupPauseUI() {
+            SetUIActive(UIScreen.SettingsUI);
+        }
+
         public void SetupPlayerStats() {
-            healthSlider.maxValue = GameManager.Instance.Player.GetComponent<Health>().MaxHealth;
-            healthSlider.value = GameManager.Instance.Player.GetComponent<Health>().CurrentHealth;
+            healthSlider.maxValue = GameManager.Instance.Player.GetComponent<Entity>().MaxHealth;
+            healthSlider.value = healthSlider.maxValue;
             inGameCreditsValue.text = GameManager.Instance.CurrentScore.ToString();
         }
 
-        public void UpdatePlayerHealth(int health) {
+        public void UpdatePlayerHealth(float health) {
             healthSlider.value = health;
         }
 
         public void UpdatePlayerCredits(int credits) {
             inGameCreditsValue.text = credits.ToString();
-        }
-
-        public void SetupPauseUI() {
-            SetUIActive(UIScreen.SettingsUI);
         }
         #endregion
     }

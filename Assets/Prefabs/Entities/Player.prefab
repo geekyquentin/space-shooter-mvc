@@ -14658,9 +14658,7 @@ GameObject:
   - component: {fileID: 212419850576164182}
   - component: {fileID: 61072580455120420}
   - component: {fileID: 50763816468549002}
-  - component: {fileID: 8235077719573705544}
-  - component: {fileID: 114960433178452790}
-  - component: {fileID: 2326276536474229932}
+  - component: {fileID: 2365715690652125885}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -14786,7 +14784,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8235077719573705544
+--- !u!114 &2365715690652125885
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -14795,47 +14793,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1510184446397956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 472b25305c0943d4ea2792730845d504, type: 3}
+  m_Script: {fileID: 11500000, guid: 245b74b258cf19940b2521d88c99c306, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   fireRate: 3
-  projectile: {fileID: 1413877261856170, guid: 7120694aa5e8a9d4a88b1e61228dabb0, type: 3}
+  projectile: {fileID: 114514555278369220, guid: 7120694aa5e8a9d4a88b1e61228dabb0, type: 3}
   destructionFX: {fileID: 8807468316094573002, guid: 0297ec52ff52605479e23f2a8683f0ef, type: 3}
   hitFX: {fileID: 198924067557857112, guid: 2dd0bdb7830e6644da169b32252dca96, type: 3}
---- !u!114 &114960433178452790
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1510184446397956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 352738bd6964f264c8a2c9d6079c56c8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 30
-  guns:
-    leftGun: {fileID: 1245768718816352}
-    leftGunVFX: {fileID: 198556210183410512}
-    centralGun: {fileID: 1211549119101102}
-    centralGunVFX: {fileID: 198855927984191062}
-    rightGun: {fileID: 1781751546136816}
-    rightGunVFX: {fileID: 198740611233361122}
-  weaponPower: 1
---- !u!114 &2326276536474229932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1510184446397956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26d5a834328eb464ba480bcf032b7c55, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   maxHealth: 100
+  speed: 30
+  weaponPower: 1
+  leftGun: {fileID: 198556210183410512}
+  centralGun: {fileID: 198855927984191062}
+  rightGun: {fileID: 198740611233361122}
 --- !u!1 &1511134553118932
 GameObject:
   m_ObjectHideFlags: 0

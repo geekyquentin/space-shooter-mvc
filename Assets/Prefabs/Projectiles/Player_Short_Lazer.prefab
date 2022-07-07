@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cd4a8ca7eaf9884280eb94f86d94583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 10
   damage: 100
   isEnemyBullet: 0
 --- !u!114 &-3769446853316052368

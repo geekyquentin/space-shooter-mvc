@@ -9,7 +9,7 @@ namespace SpaceShooter.Views {
         #region --------------------------------------- Private variables ---------------------------------------
 
         #region SerializeField
-        [SerializeField] private TouchController touchController = null;
+        [SerializeField] private TouchController touchController;
         #endregion
 
         #region Non-SerializeField
@@ -34,28 +34,15 @@ namespace SpaceShooter.Views {
         private void CheckForTouch() {
 #if UNITY_EDITOR || UNITY_STANDALONE
             if (Input.GetMouseButton(0)) {
-                HandleTouch(Input.mousePosition);
+                touchController.HandleTouch(Input.mousePosition);
             }
 #endif
 
 #if UNITY_ANDROID || UNITY_IOS
             if (Input.touchCount > 0) {
-                HandleTouch(Input.GetTouch(0).position);
+                touchController.HandleTouch(Input.GetTouch(0).position);
             }
 #endif
-        }
-
-        private void HandleTouch(Vector2 touchPos) {
-            if (EventSystem.current.IsPointerOverGameObject()) {
-                print("the pointer is over gameobject");
-                return;
-            }
-
-            Debug.Log("Hey you touched the game world!");
-            Vector2 worldTouchPos = Vector2.zero;
-            worldTouchPos = Camera.main.ScreenToWorldPoint(touchPos);
-
-            touchController.HandlePlayerMovement(worldTouchPos);
         }
         #endregion ----------------------------
 

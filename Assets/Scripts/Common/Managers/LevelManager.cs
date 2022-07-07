@@ -2,64 +2,61 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using SpaceShooter.Core;
+using SpaceShooter.Views;
 
 namespace SpaceShooter.Managers {
     public class LevelManager : Singleton<LevelManager> {
         #region ----------- Private Variables -----------------
 
         #region ----------- SerializeField -----------------
+        [Header("Enemy")]
+        [SerializeField] private EnemyView enemyPrefab;
+        [SerializeField] private float timeBetweenEnemies = 1f;
+
+        [Header("Power Up")]
         [SerializeField] private SpriteRenderer powerUp;
         [SerializeField] private float timeForNewPowerup;
+
+        [Header("Planets")]
         [SerializeField] private SpriteRenderer[] planets;
         [SerializeField] private float timeBetweenPlanets;
         #endregion --------------------------------------------
 
         #endregion --------------------------------------------
 
-        #region ----------- Non-SerializeField -----------------
-        private float currentTimeForNewPowerup = 0;
-        private float currentTimeBetweenPlanets = Mathf.Infinity;
+        #region ----------- Public Variables -----------------
+        public float TimeForNewPowerup { get => timeForNewPowerup; }
+        public float TimeBetweenPlanets { get => timeBetweenPlanets; }
+        public float TimeBetweenEnemies { get => timeBetweenEnemies; }
         #endregion --------------------------------------------
 
-        #region ----------- Public Methods -----------------
-        public void SpawnPlanets() {
-            if (currentTimeBetweenPlanets < timeBetweenPlanets) {
-                currentTimeBetweenPlanets += Time.deltaTime;
-                return;
-            }
+        #region ----------------- Private Methods -----------------
 
-            currentTimeBetweenPlanets = 0;
-            SpawnPlanet();
-        }
-
-        public void SpawnPowerUps() {
-            if (currentTimeForNewPowerup < timeForNewPowerup) {
-                currentTimeForNewPowerup += Time.deltaTime;
-                return; ;
-            }
-
-            currentTimeForNewPowerup = 0;
-            SpawnPowerUp();
-        }
-        #endregion --------------------------------------------
-
-        #region ----------- Private Methods -----------------
-        private void SpawnPlanet() {
-            SpriteRenderer planet = planets[Random.Range(0, planets.Length)];
-            Instantiate(planet.gameObject, GetPosition(planet), Quaternion.identity);
-        }
-
-        private void SpawnPowerUp() {
-            Instantiate(powerUp.gameObject, GetPosition(powerUp), Quaternion.identity);
-        }
-
+        #region -------------- Non-Monobehaviour --------------
         private Vector2 GetPosition(SpriteRenderer sprite) {
-            float xMin = GameManager.Instance.Borders.minX;
-            float xMax = GameManager.Instance.Borders.maxX;
-            float y = GameManager.Instance.Borders.maxY + GameManager.Instance.Borders.yOffset;
+            float xMin = GameManager.Instance.BorderMinPoint.x;
+            float xMax = GameManager.Instance.BorderMaxPoint.x;
+            float y = GameManager.Instance.BorderMaxPoint.y + GameManager.Instance.BorderOffset.y;
             y += sprite.bounds.size.y / 2;
 
             return new Vector2(Random.Range(xMin, xMax), y);
+        }
+        #endregion --------------------------------------------
+
+        #endregion --------------------------------------------
+
+        #region ----------- Public Methods -----------------
+        public EnemyView SpawnEnemy() {
+            return Instantiate(enemyPrefab, GetPosition(enemyPrefab.GetComponent<SpriteRenderer>()), Quaternion.identity);
+        }
+
+        public void SpawnPlanet() {
+            SpriteRenderer planet = planets[Random.Range(0, planets.Length)];
+            Instantiate(planet, GetPosition(planet), Quaternion.identity);
+        }
+
+        public void SpawnPowerUp() {
+            Instantiate(powerUp, GetPosition(powerUp), Quaternion.identity);
         }
         #endregion --------------------------------------------
     }
